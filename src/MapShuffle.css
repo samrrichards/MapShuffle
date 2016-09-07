@@ -1,0 +1,27 @@
+.MapShuffle {
+  text-align: center;
+}
+
+.header {
+  background-color: #222;
+  height: 100px;
+  padding: 10px;
+  color: white;
+}
+
+.credits {
+  font-size: 0.8em;
+}
+
+.map {
+  height: 400px;
+  width: 700px;
+  padding-top: 20px;
+  position: relative;
+  left: 20%;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
