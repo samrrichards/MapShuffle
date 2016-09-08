@@ -4,13 +4,6 @@ Generates random Google maps, located within the continental United States.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-To Do:
-
-- Use reverse geocoding to determine if map is over the ocean or not.
-  - (This will allow the app to generate maps that aren't centered in the US)
-  - (It will also allow the app to generate more precise maps)
-
-
 MIT License
 
 Copyright © 2016 Sam Richards
