@@ -11,6 +11,7 @@ export default class Shuffler extends Component {
     }
     this.genMap = this.genMap.bind(this);
     this.genLink = this.genLink.bind(this);
+    this.genOptions = this.genOptions.bind(this);
     this.newCoords = this.newCoords.bind(this);
   }
 
@@ -85,6 +86,14 @@ export default class Shuffler extends Component {
   return `https://www.google.com/maps/@${obj.lat},${obj.lng},84664m/data=!3m1!1e3`;
   }
 
+  genOptions() {
+    return {
+      mapTypeId: 'hybrid',
+      mapTypeControl: true,
+
+    }
+  }
+
   render(){
     if (!this.state.mapPresent) {
       return (
@@ -108,7 +117,7 @@ export default class Shuffler extends Component {
             bootstrapURLKeys={{key: this.state.apiKey}}
             center={this.state.displayCoords}
             zoom={8}
-            options={{mapTypeId: 'hybrid'}} />
+            options={this.genOptions()} />
           </div>
           <p>Here is a<a target={"blank"} href={this.genLink(this.state.displayCoords)}> link to the map</a>.</p>
           <p>Click the button to get a new random map!</p>
