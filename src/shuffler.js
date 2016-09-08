@@ -95,7 +95,8 @@ export default class Shuffler extends Component {
           <button onClick={this.newCoords}>Generate map</button>
           <div className="credits">
             <p>© 2016 Sam Richards<br/>
-            Bootstrapped with <a target={"blank"} href={"https://github.com/facebookincubator/create-react-app"}>Create React App</a></p>
+            Bootstrapped with <a target={"blank"} href={"https://github.com/facebookincubator/create-react-app"}>Create React App</a>.<br/>
+            Check out the <a target={"blank"} href={"https://github.com/samrrichards/MapShuffle"}>source code </a>on my Github.</p>
           </div>
         </div>
       );
@@ -107,16 +108,15 @@ export default class Shuffler extends Component {
             bootstrapURLKeys={{key: this.state.apiKey}}
             center={this.state.displayCoords}
             zoom={8}
-            options={{mapTypeId: 'hybrid'}}
-            >
-            </GoogleMap>
+            options={{mapTypeId: 'hybrid'}} />
           </div>
           <p>Here is a<a target={"blank"} href={this.genLink(this.state.displayCoords)}> link to the map</a>.</p>
           <p>Click the button to get a new random map!</p>
           <button onClick={this.newCoords}>Generate new map</button>
           <div className="credits">
             <p>© Sam Richards 2016<br/>
-            Bootstrapped with <a target={"blank"} href={"https://github.com/facebookincubator/create-react-app"}>Create React App</a></p>
+            Bootstrapped with <a target={"blank"} href={"https://github.com/facebookincubator/create-react-app"}>Create React App</a>.<br/>
+            Check out the <a target={"blank"} href={"https://github.com/samrrichards/MapShuffle"}>source code </a>on my Github.</p>
           </div>
         </div>
       );

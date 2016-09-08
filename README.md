@@ -6,15 +6,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 To Do:
 
-- Use reverse geocoding to determine if you're over the ocean or not.
-  - (This will allow you to generate maps that aren't centered in the US)
-  - (It will also allow you to generate more precise maps)
-
-- Format site to make it look nicer.
-
-- Host site on mapshuffle.com
-  - This will require hosting the site on Heroku.
-    - This will require uploading things to Github.
+- Use reverse geocoding to determine if map is over the ocean or not.
+  - (This will allow the app to generate maps that aren't centered in the US)
+  - (It will also allow the app to generate more precise maps)
 
 
 MIT License

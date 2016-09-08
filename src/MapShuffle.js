@@ -9,7 +9,7 @@ class MapShuffle extends Component {
       <div className="MapShuffle">
         <div className="header">
           <h1>MapShuffle</h1>
-          <p>A geography discovery app</p>
+          <p>A geography discovery app.</p>
         </div>
         <div className="Shuffler">
           <Shuffler />

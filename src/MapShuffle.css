@@ -17,11 +17,6 @@
   height: 400px;
   width: 700px;
   padding-top: 20px;
-  position: relative;
-  left: 20%;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  vertical-align: middle;
+  display: inline-block;
 }
