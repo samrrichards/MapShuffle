@@ -10,8 +10,8 @@ export default class MapControls extends Component {
       usCoords: false,
       displayZoom: null,
       displayCoords: null,
-      storedZoom: null,
-      storedCoords: null,
+      storedZoom: 8,
+      storedCoords: genCoords(),
     };
 
     this.newMap = this.newMap.bind(this);
@@ -20,20 +20,25 @@ export default class MapControls extends Component {
     this.toggleCoords = this.toggleCoords.bind(this);
   }
 
-  componentDidMount() {
+  shouldComponentUpdate() {
     this.setState({
       storedZoom: this.state.randomZoom ? genZoom() : 8,
       storedCoords: this.state.usCoords ? {lat: 37.7672048, lng:-122.4473408} : genCoords()
     });
-    console.log(this.state.storedZoom);
-    console.log(this.state.storedCoords);
+    console.log("Map Controls scu randomZoom: ", this.state.randomZoom);
+    console.log("Map Controls scu usCoords: ", this.state.usCoords);
+    console.log("Map Controls scu zoom: ", this.state.storedZoom);
+    console.log("Map Controls scu coords: ", this.state.storedCoords);
+    return true;
   }
 
   newMap(){
     this.setState({
-      displayZoom: this.storedZoom,
-      displayCoords: this.storedCoords
+      displayZoom: this.state.storedZoom,
+      displayCoords: this.state.storedCoords
     });
+    console.log("Map Controls newMap zoom: ", this.state.displayZoom);
+    console.log("Map Controls newMap coords: ", this.state.displayCoords);
   }
 
   toggleZoom(){
@@ -49,12 +54,12 @@ export default class MapControls extends Component {
     return (
       <div>
         <MapWrapper
-          zoom={this.displayZoom}
-          coords={this.displayCoords}
+          zoom={this.state.displayZoom}
+          coords={this.state.displayCoords}
           apiKey={'AIzaSyAKvQ74lV2z8AuM6ERIearPxOPWBzuRVfo'}
         />
         <div className="map-options">
-          <button onClick={this.newMap}>Generate map</button>
+          <button onClick={this.newMap}>Generate map</button><br/>
           <label className="map-toggle">
             <input
               type="checkbox"
@@ -62,6 +67,8 @@ export default class MapControls extends Component {
               onChange={this.toggleZoom}
             />
             Randomize zoom level
+          </label>
+          <label>
             <input
               type="checkbox"
               checked={this.state.usCoords}

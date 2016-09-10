@@ -12,6 +12,16 @@ export default class MapWrapper extends Component {
     this.genOptions = this.genOptions.bind(this);
   }
 
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      mapPresent: newProps.coords != null
+    });
+    console.log(this.props);
+    //console.log('Map Wrapper cwrp this.props.coords', this.props.coords);
+    //console.log('Map Wrapper cwrp newProps.coords', newProps.coords);
+    //console.log('Map Wrapper cwrp mapPresent: ', this.state.mapPresent);
+  }
+
   genLink(obj) {
   return `https://www.google.com/maps/@${obj.lat},${obj.lng},84664m/data=!3m1!1e3`;
   }
@@ -37,7 +47,7 @@ export default class MapWrapper extends Component {
         <div>
           <div className="map">
             <GoogleMap
-            bootstrapURLKeys={{key: this.state.apiKey}}
+            bootstrapURLKeys={{key: this.props.apiKey}}
             center={this.props.coords}
             zoom={this.props.zoom}
             options={this.genOptions()} />
