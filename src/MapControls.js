@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {genZoom, genCoords} from './map_utils.js';
-import class Shuffler from './shuffler.js';
+import MapWrapper from './MapWrapper.js';
 
 export default class MapControls extends Component {
   constructor(){
@@ -10,7 +10,7 @@ export default class MapControls extends Component {
       usCoords: false,
       displayZoom: null,
       displayCoords: null,
-      storedZoom: null
+      storedZoom: null,
       storedCoords: null,
     };
 
