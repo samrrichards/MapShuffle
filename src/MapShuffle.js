@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Shuffler from './shuffler.js';
+import MapControls from './MapControls.js';
 import './MapShuffle.css';
 
 class MapShuffle extends Component {
@@ -11,8 +11,8 @@ class MapShuffle extends Component {
           <h1>MapShuffle</h1>
           <p>A geography discovery app.</p>
         </div>
-        <div className="Shuffler">
-          <Shuffler />
+        <div className="MapControls">
+          <MapControls />
         </div>
       </div>
     );

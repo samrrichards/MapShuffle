@@ -13,6 +13,10 @@
   font-size: 0.8em;
 }
 
+.map-options {
+  font-size: 0.7em;
+}
+
 .map {
   height: 400px;
   width: 700px;

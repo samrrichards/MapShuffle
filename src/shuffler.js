@@ -8,11 +8,14 @@ export default class Shuffler extends Component {
       mapPresent: false,
       displayCoords: null,
       apiKey: 'AIzaSyAKvQ74lV2z8AuM6ERIearPxOPWBzuRVfo'
-    }
+    };
+
     this.genMap = this.genMap.bind(this);
     this.genLink = this.genLink.bind(this);
     this.genOptions = this.genOptions.bind(this);
+    this.genZoom = this.genZoom.bind(this);
     this.newCoords = this.newCoords.bind(this);
+    this.toggleZoom = this.toggleZoom.bind(this);
   }
 
   newCoords(){
@@ -20,6 +23,11 @@ export default class Shuffler extends Component {
       mapPresent: true,
       displayCoords: this.genMap()
     });
+  }
+
+  toggleZoom(){
+    console.log(this.state.randomZoom);
+    this.setState({randomZoom: !this.state.randomZoom});
   }
 
   genMap() {
@@ -90,8 +98,14 @@ export default class Shuffler extends Component {
     return {
       mapTypeId: 'hybrid',
       mapTypeControl: true,
-
     }
+  }
+
+  genZoom() {
+    const randomInt = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+    let zoom = randomInt(6, 16);
+    console.log("Zoom: ", zoom);
+    return zoom;
   }
 
   render(){
@@ -102,6 +116,14 @@ export default class Shuffler extends Component {
           <p>The map will likely be centered somewhere in the continental United States.</p>
           <p>Check back soon for a version with a wider range of locations!</p>
           <button onClick={this.newCoords}>Generate map</button>
+          <label >
+            <input
+              type="checkbox"
+              checked={this.state.randomZoom}
+              onChange={this.toggleZoom}
+            />
+            Random zoom
+          </label>
           <div className="credits">
             <p>© 2016 Sam Richards<br/>
             Bootstrapped with <a target={"blank"} href={"https://github.com/facebookincubator/create-react-app"}>Create React App</a>.<br/>
@@ -122,6 +144,14 @@ export default class Shuffler extends Component {
           <p>Here is a<a target={"blank"} href={this.genLink(this.state.displayCoords)}> link to the map</a>.</p>
           <p>Click the button to get a new random map!</p>
           <button onClick={this.newCoords}>Generate new map</button>
+          <label className="map-toggle">
+            <input
+              type="checkbox"
+              checked={this.state.randomZoom}
+              onChange={this.toggleZoom}
+            />
+            Random Zoom
+          </label>
           <div className="credits">
             <p>© Sam Richards 2016<br/>
             Bootstrapped with <a target={"blank"} href={"https://github.com/facebookincubator/create-react-app"}>Create React App</a>.<br/>
