@@ -9,9 +9,7 @@ export default class MapControls extends Component {
       randomZoom: false,
       usCoords: false,
       displayZoom: null,
-      displayCoords: null,
-      storedZoom: 8,
-      storedCoords: genCoords(),
+      displayCoords: null
     };
 
     this.newMap = this.newMap.bind(this);
@@ -20,34 +18,23 @@ export default class MapControls extends Component {
     this.toggleCoords = this.toggleCoords.bind(this);
   }
 
-  shouldComponentUpdate() {
-    this.setState({
-      storedZoom: this.state.randomZoom ? genZoom() : 8,
-      storedCoords: this.state.usCoords ? {lat: 37.7672048, lng:-122.4473408} : genCoords()
-    });
-    console.log("Map Controls scu randomZoom: ", this.state.randomZoom);
-    console.log("Map Controls scu usCoords: ", this.state.usCoords);
-    console.log("Map Controls scu zoom: ", this.state.storedZoom);
-    console.log("Map Controls scu coords: ", this.state.storedCoords);
-    return true;
-  }
-
   newMap(){
     this.setState({
-      displayZoom: this.state.storedZoom,
-      displayCoords: this.state.storedCoords
+      displayZoom: this.state.randomZoom ? genZoom() : 8,
+      displayCoords: this.state.usCoords ? {lat: 37.7672048, lng:-122.4473408} : genCoords()
     });
-    console.log("Map Controls newMap zoom: ", this.state.displayZoom);
-    console.log("Map Controls newMap coords: ", this.state.displayCoords);
   }
 
   toggleZoom(){
-    this.setState({randomZoom: !this.state.randomZoom});
-    console.log()
+    this.setState({
+      randomZoom: !this.state.randomZoom
+    });
   }
 
   toggleCoords(){
-    this.setState({usCoords: !this.state.usCoords});
+    this.setState({
+      usCoords: !this.state.usCoords
+    });
   }
 
   render() {

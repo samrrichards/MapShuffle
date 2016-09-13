@@ -16,10 +16,6 @@ export default class MapWrapper extends Component {
     this.setState({
       mapPresent: newProps.coords != null
     });
-    console.log(this.props);
-    //console.log('Map Wrapper cwrp this.props.coords', this.props.coords);
-    //console.log('Map Wrapper cwrp newProps.coords', newProps.coords);
-    //console.log('Map Wrapper cwrp mapPresent: ', this.state.mapPresent);
   }
 
   genLink(obj) {
