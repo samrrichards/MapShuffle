@@ -21,8 +21,9 @@ export default class MapControls extends Component {
   newMap(){
     this.setState({
       displayZoom: this.state.randomZoom ? genZoom() : 8,
-      displayCoords: this.state.usCoords ? {lat: 37.7672048, lng:-122.4473408} : genCoords()
+      displayCoords: this.state.usCoords ? genCoords() : {lat: 37.7878783, lng:-122.4001403}
     });
+
   }
 
   toggleZoom(){
