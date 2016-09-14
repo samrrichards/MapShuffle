@@ -18,8 +18,8 @@ export default class MapWrapper extends Component {
     });
   }
 
-  genLink(obj) {
-  return `https://www.google.com/maps/@${obj.lat},${obj.lng},84664m/data=!3m1!1e3`;
+  genLink(coords) {
+  return `https://www.google.com/maps/@${coords.lat},${coords.lng},${this.props.zoom}z/data=!3m1!1e3`;
   }
 
   genOptions() {
