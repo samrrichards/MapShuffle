@@ -1,12 +1,12 @@
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+const getCoord = coord => coord >= 0 ? coord + randomInt(1, 99999999)/100000000 : coord - randomInt(1, 99999999)/100000000;
 
 export function genZoom() {
   return randomInt(6, 16);
 }
 
 export function genCoords() {
-  const getCoord = coord => coord >= 0 ? coord + randomInt(1, 99999999)/100000000 : coord - randomInt(1, 99999999)/100000000;
-  const coordObj =  {lat: getCoord(randomInt(25, 49)), lng: getCoord(randomInt(-69, -125))};
+  const coordObj =  {lat: getCoord(randomInt(25, 49)), lng: getCoord(randomInt(-125, -69))};
 
   //Atlantic Ocean off of Long Island
   if (coordObj.lat < 40.54 && coordObj.lng > -73.94) {

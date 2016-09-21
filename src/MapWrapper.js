@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 import GoogleMap from 'google-map-react';
 
 export default class MapWrapper extends Component {
@@ -16,10 +17,17 @@ export default class MapWrapper extends Component {
     this.setState({
       mapPresent: newProps.coords != null
     });
+    if (newProps.coords != null) {
+      $.get(this.genGeocode(newProps.coords), data => console.log(data.results));
+    }
   }
 
   genLink(coords) {
   return `https://www.google.com/maps/@${coords.lat},${coords.lng},${this.props.zoom}z/data=!3m1!1e3`;
+  }
+
+  genGeocode(coords){
+    return `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.lat},${coords.lng}&key=${this.props.apiKey}`;
   }
 
   genOptions() {
