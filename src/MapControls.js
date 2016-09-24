@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import {genZoom, genCoords} from './map_utils.js';
+import {genZoom, genCoords, genGlobalCoords} from './map_utils.js';
 import MapWrapper from './MapWrapper.js';
+import async from 'async';
+import $ from 'jquery';
 
 export default class MapControls extends Component {
   constructor(){
@@ -13,10 +15,25 @@ export default class MapControls extends Component {
     };
 
     this.newMap = this.newMap.bind(this);
+    this.newGeocodes = this.newGeocodes.bind(this);
 
     this.toggleZoom = this.toggleZoom.bind(this);
     this.toggleCoords = this.toggleCoords.bind(this);
+
+    this.genGeocode = this.genGeocode.bind(this);
+    this.fetchGeocode = this.fetchGeocode.bind(this);
   }
+
+  newGeocodes(){
+    let coordArray = [];
+
+    for (let i = 0; i < 3; i++) {
+      coordArray.push(genGlobalCoords());
+    }
+
+    return async.map(coordArray, item => this.genGeocode(item));
+  }
+
 
   newMap(){
     this.setState({
@@ -24,6 +41,16 @@ export default class MapControls extends Component {
       displayCoords: this.state.usCoords ? genCoords() : {lat: 37.7878783, lng:-122.4001403}
     });
 
+  }
+
+  genGeocode(){
+    let coords = genGlobalCoords();
+    console.log(coords);
+    return `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.lat},${coords.lng}&key=AIzaSyAKvQ74lV2z8AuM6ERIearPxOPWBzuRVfo`;
+  }
+
+  fetchGeocode(){
+    $.get(this.genGeocode(), data => console.log(data));
   }
 
   toggleZoom(){
@@ -48,6 +75,7 @@ export default class MapControls extends Component {
         />
         <div className="map-options">
           <button onClick={this.newMap}>Generate map</button><br/>
+          <button onClick={this.fetchGeocode}>Fetch geocode</button><br/>
           <label className="map-toggle">
             <input
               type="checkbox"

@@ -5,6 +5,10 @@ export function genZoom() {
   return randomInt(6, 16);
 }
 
+export function genGlobalCoords(){
+  return {lat: getCoord(randomInt(-70, 70)), lng: getCoord(randomInt(-180, 180))};
+}
+
 export function genCoords() {
   const coordObj =  {lat: getCoord(randomInt(25, 49)), lng: getCoord(randomInt(-125, -69))};
 

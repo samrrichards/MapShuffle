@@ -11,6 +11,7 @@ export default class MapWrapper extends Component {
 
     this.genLink = this.genLink.bind(this);
     this.genOptions = this.genOptions.bind(this);
+    this.genGoecode = this.genGeocode.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
