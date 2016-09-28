@@ -11,16 +11,16 @@ export default class MapWrapper extends Component {
 
     this.genLink = this.genLink.bind(this);
     this.genOptions = this.genOptions.bind(this);
-    this.genGoecode = this.genGeocode.bind(this);
+    this.genGeocode = this.genGeocode.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
     this.setState({
       mapPresent: newProps.coords != null
     });
-    if (newProps.coords != null) {
-      $.get(this.genGeocode(newProps.coords), data => console.log(data.results));
-    }
+    // if (newProps.coords != null) {
+    //   $.get(this.genGeocode(newProps.coords), data => console.log(data.results));
+    // }
   }
 
   genLink(coords) {

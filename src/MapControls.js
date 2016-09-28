@@ -11,7 +11,8 @@ export default class MapControls extends Component {
       randomZoom: false,
       usCoords: false,
       displayZoom: null,
-      displayCoords: null
+      displayCoords: null,
+      sfCoords: {lat: 37.7878783, lng:-122.4001403}
     };
 
     this.newMap = this.newMap.bind(this);
@@ -36,21 +37,34 @@ export default class MapControls extends Component {
 
 
   newMap(){
-    this.setState({
-      displayZoom: this.state.randomZoom ? genZoom() : 8,
-      displayCoords: this.state.usCoords ? genCoords() : {lat: 37.7878783, lng:-122.4001403}
-    });
-
+    this.setState({displayZoom : this.state.randomZoom ? genZoom() : 8});
+    if (this.state.usCoords) {
+      this.setState({displayCoords: genCoords()});
+    } else {
+      this.fetchGeocode();
+    }
   }
 
-  genGeocode(){
-    let coords = genGlobalCoords();
-    console.log(coords);
+  genGeocode(coords){
     return `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.lat},${coords.lng}&key=AIzaSyAKvQ74lV2z8AuM6ERIearPxOPWBzuRVfo`;
   }
 
   fetchGeocode(){
-    $.get(this.genGeocode(), data => console.log(data));
+    let coords = genGlobalCoords();
+    //console.log(coords);
+    $.get(this.genGeocode(coords), data => {
+      if (data.status === "OK") {
+        let results = data.results;
+        let countryName = results[results.length - 1].formatted_address;
+        if (countryName !== "Antarctica" && countryName !== "Greenland") {
+          console.log(countryName);
+          this.setState({displayCoords: coords});
+        }
+      } else {
+        //console.log("fetchGeocode should be called...");
+        this.fetchGeocode();
+      }
+    });
   }
 
   toggleZoom(){
@@ -75,7 +89,6 @@ export default class MapControls extends Component {
         />
         <div className="map-options">
           <button onClick={this.newMap}>Generate map</button><br/>
-          <button onClick={this.fetchGeocode}>Fetch geocode</button><br/>
           <label className="map-toggle">
             <input
               type="checkbox"
