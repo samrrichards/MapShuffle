@@ -35,7 +35,6 @@ export default class MapControls extends Component {
     return async.map(coordArray, item => this.genGeocode(item));
   }
 
-
   newMap(){
     this.setState({displayZoom : this.state.randomZoom ? genZoom() : 8});
     if (this.state.usCoords) {
@@ -56,9 +55,10 @@ export default class MapControls extends Component {
       if (data.status === "OK") {
         let results = data.results;
         let countryName = results[results.length - 1].formatted_address;
-        if (countryName !== "Antarctica" && countryName !== "Greenland") {
-          console.log(countryName);
+        if (results.length > 1 && countryName !== "Antarctica" && countryName !== "Greenland") {
           this.setState({displayCoords: coords});
+        } else {
+          this.fetchGeocode(); 
         }
       } else {
         //console.log("fetchGeocode should be called...");

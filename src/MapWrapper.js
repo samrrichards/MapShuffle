@@ -18,9 +18,9 @@ export default class MapWrapper extends Component {
     this.setState({
       mapPresent: newProps.coords != null
     });
-    // if (newProps.coords != null) {
-    //   $.get(this.genGeocode(newProps.coords), data => console.log(data.results));
-    // }
+    if (newProps.coords != null) {
+      $.get(this.genGeocode(newProps.coords), data => console.log(data.results));
+    }
   }
 
   genLink(coords) {
