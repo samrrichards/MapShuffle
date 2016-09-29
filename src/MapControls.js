@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import {genZoom, genCoords, genGlobalCoords} from './map_utils.js';
+import {genZoom, genGeocode, genCoords, genGlobalCoords} from './map_utils.js';
 import MapWrapper from './MapWrapper.js';
-import async from 'async';
 import $ from 'jquery';
 
 export default class MapControls extends Component {
@@ -12,63 +11,54 @@ export default class MapControls extends Component {
       usCoords: false,
       displayZoom: null,
       displayCoords: null,
-      displayCountry: null,
+      displayLocation: null,
       sfCoords: {lat: 37.7878783, lng:-122.4001403}
     };
 
     this.newMap = this.newMap.bind(this);
-    this.newGeocodes = this.newGeocodes.bind(this);
+
+    this.globalMap = this.globalMap.bind(this);
+    this.usMap = this.usMap.bind(this);
 
     this.toggleZoom = this.toggleZoom.bind(this);
     this.toggleCoords = this.toggleCoords.bind(this);
-
-    this.genGeocode = this.genGeocode.bind(this);
-    this.fetchGeocode = this.fetchGeocode.bind(this);
-  }
-
-  newGeocodes(){
-    let coordArray = [];
-
-    for (let i = 0; i < 3; i++) {
-      coordArray.push(genGlobalCoords());
-    }
-
-    return async.map(coordArray, item => this.genGeocode(item));
   }
 
   newMap(){
     this.setState({displayZoom : this.state.randomZoom ? genZoom() : 8});
     if (this.state.usCoords) {
-      this.setState({
-        displayCoords: genCoords(),
-        displayCountry: "United States"
-      });
+      this.usMap();
     } else {
-      this.fetchGeocode();
+      this.globalMap();
     }
   }
 
-  genGeocode(coords){
-    return `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.lat},${coords.lng}&key=AIzaSyAKvQ74lV2z8AuM6ERIearPxOPWBzuRVfo`;
+  usMap(){
+    let coords = genCoords();
+    this.setState({
+      isGlobal: false,
+      displayCoords: coords,
+      displayLocation: "United States"
+    });
   }
 
-  fetchGeocode(){
+  globalMap(){
     let coords = genGlobalCoords();
-    //console.log(coords);
-    $.get(this.genGeocode(coords), data => {
+    $.get(genGeocode(coords), data => {
       if (data.status === "OK") {
         let results = data.results;
         let countryName = results[results.length - 1].formatted_address;
         if (results.length > 1 && countryName !== "Antarctica" && countryName !== "Greenland") {
           this.setState({
+            isGlobal: true,
             displayCoords: coords,
-            displayCountry: countryName
+            displayLocation: countryName
           });
         } else {
-          this.fetchGeocode();
+          this.globalMap();
         }
       } else {
-        this.fetchGeocode();
+        this.globalMap();
       }
     });
   }
@@ -91,7 +81,8 @@ export default class MapControls extends Component {
         <MapWrapper
           zoom={this.state.displayZoom}
           coords={this.state.displayCoords}
-          country={this.state.displayCountry}
+          location={this.state.displayLocation}
+          isGlobal={this.state.isGlobal}
           apiKey={'AIzaSyAKvQ74lV2z8AuM6ERIearPxOPWBzuRVfo'}
         />
         <div className="map-options">

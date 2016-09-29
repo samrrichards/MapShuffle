@@ -19,7 +19,7 @@ export default class MapWrapper extends Component {
     this.setState({
       mapPresent: newProps.coords != null
     });
-    if (newProps.coords != null) {
+    if (newProps.isGlobal === false) {
       $.get(this.genGeocode(newProps.coords), data => console.log(data.results));
     }
   }
@@ -40,12 +40,15 @@ export default class MapWrapper extends Component {
   }
 
   genGreeting() {
-    let countryName = this.props.country;
-    if (countryName[countryName.length - 1] === 's') {
-      return `Welcome to the ${this.props.country}!`
-    } else {
-      return `Welcome to ${this.props.country}!`;
+    if (this.props.isGlobal) {
+      if (this.props.location[this.props.location.length - 1] === 's') {
+        return `Welcome to the ${this.props.location}!`;
+      } else {
+        return `Welcome to ${this.props.location}!`;
+      }
     }
+
+    return `Welcome to the ${this.props.location}!`;
   }
 
   render(){
