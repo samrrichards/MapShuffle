@@ -12,6 +12,7 @@ export default class MapControls extends Component {
       usCoords: false,
       displayZoom: null,
       displayCoords: null,
+      displayCountry: null,
       sfCoords: {lat: 37.7878783, lng:-122.4001403}
     };
 
@@ -38,7 +39,10 @@ export default class MapControls extends Component {
   newMap(){
     this.setState({displayZoom : this.state.randomZoom ? genZoom() : 8});
     if (this.state.usCoords) {
-      this.setState({displayCoords: genCoords()});
+      this.setState({
+        displayCoords: genCoords(),
+        displayCountry: "United States"
+      });
     } else {
       this.fetchGeocode();
     }
@@ -56,12 +60,14 @@ export default class MapControls extends Component {
         let results = data.results;
         let countryName = results[results.length - 1].formatted_address;
         if (results.length > 1 && countryName !== "Antarctica" && countryName !== "Greenland") {
-          this.setState({displayCoords: coords});
+          this.setState({
+            displayCoords: coords,
+            displayCountry: countryName
+          });
         } else {
-          this.fetchGeocode(); 
+          this.fetchGeocode();
         }
       } else {
-        //console.log("fetchGeocode should be called...");
         this.fetchGeocode();
       }
     });
@@ -85,6 +91,7 @@ export default class MapControls extends Component {
         <MapWrapper
           zoom={this.state.displayZoom}
           coords={this.state.displayCoords}
+          country={this.state.displayCountry}
           apiKey={'AIzaSyAKvQ74lV2z8AuM6ERIearPxOPWBzuRVfo'}
         />
         <div className="map-options">

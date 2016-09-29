@@ -12,6 +12,7 @@ export default class MapWrapper extends Component {
     this.genLink = this.genLink.bind(this);
     this.genOptions = this.genOptions.bind(this);
     this.genGeocode = this.genGeocode.bind(this);
+    this.genGreeting = this.genGreeting.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -38,13 +39,20 @@ export default class MapWrapper extends Component {
     }
   }
 
+  genGreeting() {
+    let countryName = this.props.country;
+    if (countryName[countryName.length - 1] === 's') {
+      return `Welcome to the ${this.props.country}!`
+    } else {
+      return `Welcome to ${this.props.country}!`;
+    }
+  }
+
   render(){
     if (!this.state.mapPresent) {
       return (
         <div>
           <p>Click the button to get a random Google map!</p>
-          <p>The map will likely be centered somewhere in the continental United States.</p>
-          <p>Check back soon for a version with a wider range of locations!</p>
         </div>
       );
     } else {
@@ -57,6 +65,7 @@ export default class MapWrapper extends Component {
             zoom={this.props.zoom}
             options={this.genOptions()} />
           </div>
+          <p>{this.genGreeting()}</p>
           <p>Here is a<a target={"blank"} href={this.genLink(this.props.coords)}> link to the map</a>.</p>
           <p>Click the button to get a new random map!</p>
         </div>
