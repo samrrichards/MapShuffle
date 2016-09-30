@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {genZoom, genGeocode, genCoords, genGlobalCoords} from './map_utils.js';
 import MapWrapper from './MapWrapper.js';
 import $ from 'jquery';
+import _ from 'lodash';
 
 export default class MapControls extends Component {
   constructor(){
@@ -33,7 +34,7 @@ export default class MapControls extends Component {
     }
   }
 
-  usMap(){
+  usMapOld(){
     let coords = genCoords();
     this.setState({
       isGlobal: false,
@@ -42,13 +43,36 @@ export default class MapControls extends Component {
     });
   }
 
+  usMap() {
+    let coords = genCoords();
+    $.get(genGeocode(coords), data => {
+      if (data.status === "OK") {
+        let results = data.results;
+        let countryName = _.find(results, item => item.types.includes("country")).formatted_address;
+        if (countryName !== null && countryName === "United States") {
+          let stateName = _.find(results, item => item.types.includes("administrative_area_level_1"))
+            .formatted_address.replace(/, USA/i, '');
+          this.setState({
+            isGlobal: true,
+            displayCoords: coords,
+            displayLocation: stateName
+          });
+        } else {
+          this.usMap();
+        }
+      } else {
+        this.usMap();
+      }
+    });
+  }
+
   globalMap(){
     let coords = genGlobalCoords();
     $.get(genGeocode(coords), data => {
       if (data.status === "OK") {
         let results = data.results;
-        let countryName = results[results.length - 1].formatted_address;
-        if (results.length > 1 && countryName !== "Antarctica" && countryName !== "Greenland") {
+        let countryName = _.find(results, item => item.types.includes("country")).formatted_address;
+        if (countryName !== null && countryName !== "Antarctica" && countryName !== "Greenland") {
           this.setState({
             isGlobal: true,
             displayCoords: coords,
