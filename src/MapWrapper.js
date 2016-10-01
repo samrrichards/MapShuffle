@@ -12,16 +12,12 @@ export default class MapWrapper extends Component {
     this.genLink = this.genLink.bind(this);
     this.genOptions = this.genOptions.bind(this);
     this.genGeocode = this.genGeocode.bind(this);
-    this.genGreeting = this.genGreeting.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
     this.setState({
       mapPresent: newProps.coords != null
     });
-    if (newProps.isGlobal === false) {
-      $.get(this.genGeocode(newProps.coords), data => console.log(data.results));
-    }
   }
 
   genLink(coords) {
@@ -37,18 +33,6 @@ export default class MapWrapper extends Component {
       mapTypeId: 'hybrid',
       mapTypeControl: true,
     }
-  }
-
-  genGreeting() {
-    if (this.props.isGlobal) {
-      if (this.props.location[this.props.location.length - 1] === 's') {
-        return `Welcome to the ${this.props.location}!`;
-      } else {
-        return `Welcome to ${this.props.location}!`;
-      }
-    }
-
-    return `Welcome to the ${this.props.location}!`;
   }
 
   render(){
@@ -68,7 +52,7 @@ export default class MapWrapper extends Component {
             zoom={this.props.zoom}
             options={this.genOptions()} />
           </div>
-          <p>{this.genGreeting()}</p>
+          <p>{`Welcome to ${this.props.location}!`}</p>
           <p>Here is a<a target={"blank"} href={this.genLink(this.props.coords)}> link to the map</a>.</p>
           <p>Click the button to get a new random map!</p>
         </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {genZoom, genGeocode, genCoords, genGlobalCoords} from './map_utils.js';
+import {genZoom, genGeocode, genUsCoords, genGlobalCoords} from './map_utils.js';
 import MapWrapper from './MapWrapper.js';
 import $ from 'jquery';
 import _ from 'lodash';
@@ -12,14 +12,15 @@ export default class MapControls extends Component {
       usCoords: false,
       displayZoom: null,
       displayCoords: null,
-      displayLocation: null,
-      sfCoords: {lat: 37.7878783, lng:-122.4001403}
+      displayLocation: null
     };
 
     this.newMap = this.newMap.bind(this);
 
     this.globalMap = this.globalMap.bind(this);
     this.usMap = this.usMap.bind(this);
+
+    this.getStateInfo = this.getStateInfo.bind(this);
 
     this.toggleZoom = this.toggleZoom.bind(this);
     this.toggleCoords = this.toggleCoords.bind(this);
@@ -34,29 +35,27 @@ export default class MapControls extends Component {
     }
   }
 
-  usMapOld(){
-    let coords = genCoords();
-    this.setState({
-      isGlobal: false,
-      displayCoords: coords,
-      displayLocation: "United States"
-    });
+  getStateInfo(results, coords){
+    let stateData = _.find(results, item => item.types.includes("administrative_area_level_1"));
+
+    if (stateData === undefined) {
+      this.usMap();
+    } else {
+      this.setState({
+        displayCoords: coords,
+        displayLocation: stateData.formatted_address.replace(/, USA/i, '')
+      });
+    }
   }
 
   usMap() {
-    let coords = genCoords();
+    let coords = genUsCoords();
     $.get(genGeocode(coords), data => {
       if (data.status === "OK") {
         let results = data.results;
-        let countryName = _.find(results, item => item.types.includes("country")).formatted_address;
-        if (countryName !== null && countryName === "United States") {
-          let stateName = _.find(results, item => item.types.includes("administrative_area_level_1"))
-            .formatted_address.replace(/, USA/i, '');
-          this.setState({
-            isGlobal: true,
-            displayCoords: coords,
-            displayLocation: stateName
-          });
+        let countryName = _.find(results, item => item.types.includes("country")).formatted_address || false;
+        if (countryName && countryName === "United States") {
+          this.getStateInfo(results, coords);
         } else {
           this.usMap();
         }
@@ -71,13 +70,16 @@ export default class MapControls extends Component {
     $.get(genGeocode(coords), data => {
       if (data.status === "OK") {
         let results = data.results;
-        let countryName = _.find(results, item => item.types.includes("country")).formatted_address;
-        if (countryName !== null && countryName !== "Antarctica" && countryName !== "Greenland") {
-          this.setState({
-            isGlobal: true,
-            displayCoords: coords,
-            displayLocation: countryName
-          });
+        let countryName = _.find(results, item => item.types.includes("country")).formatted_address || false;
+        if (countryName && countryName !== "Antarctica" && countryName !== "Greenland") {
+          if (countryName === "United States") {
+            this.getStateInfo(results, coords);
+          } else {
+            this.setState({
+              displayCoords: coords,
+              displayLocation: countryName
+            });
+          }
         } else {
           this.globalMap();
         }
@@ -106,7 +108,6 @@ export default class MapControls extends Component {
           zoom={this.state.displayZoom}
           coords={this.state.displayCoords}
           location={this.state.displayLocation}
-          isGlobal={this.state.isGlobal}
           apiKey={'AIzaSyAKvQ74lV2z8AuM6ERIearPxOPWBzuRVfo'}
         />
         <div className="map-options">
