@@ -26,10 +26,6 @@ export default class MapControls extends Component {
     this.toggleCoords = this.toggleCoords.bind(this);
   }
 
-  componentWillReceiveProps(newProps){
-    console.log(newProps.apiKey);
-  }
-
   newMap(){
     this.setState({displayZoom : this.state.randomZoom ? genZoom() : 8});
     if (this.state.usCoords) {
