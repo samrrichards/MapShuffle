@@ -13,7 +13,7 @@ class MapShuffle extends Component {
   }
 
   componentWillMount() {
-    $.get('http://localhost:8000', data => {
+    $.get(this.state.keyEndpoint, data => {
       this.setState({apiKey: data});
     });
   }
