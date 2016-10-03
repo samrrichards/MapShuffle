@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 import GoogleMap from 'google-map-react';
 
 export default class MapWrapper extends Component {

@@ -5,8 +5,8 @@ export function genZoom() {
   return randomInt(6, 16);
 }
 
-export function genGeocode(coords){
-  return `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.lat},${coords.lng}&key=AIzaSyAKvQ74lV2z8AuM6ERIearPxOPWBzuRVfo`;
+export function genGeocode(coords, apiKey){
+  return `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.lat},${coords.lng}&key=${apiKey}`;
 }
 
 export function genGlobalCoords(){

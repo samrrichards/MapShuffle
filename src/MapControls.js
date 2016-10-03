@@ -26,6 +26,10 @@ export default class MapControls extends Component {
     this.toggleCoords = this.toggleCoords.bind(this);
   }
 
+  componentWillReceiveProps(newProps){
+    console.log(newProps.apiKey);
+  }
+
   newMap(){
     this.setState({displayZoom : this.state.randomZoom ? genZoom() : 8});
     if (this.state.usCoords) {
@@ -50,7 +54,7 @@ export default class MapControls extends Component {
 
   usMap() {
     let coords = genUsCoords();
-    $.get(genGeocode(coords), data => {
+    $.get(genGeocode(coords, this.props.apiKey), data => {
       if (data.status === "OK") {
         let results = data.results;
         let countryName = _.find(results, item => item.types.includes("country")).formatted_address || false;
@@ -67,7 +71,7 @@ export default class MapControls extends Component {
 
   globalMap(){
     let coords = genGlobalCoords();
-    $.get(genGeocode(coords), data => {
+    $.get(genGeocode(coords, this.props.apiKey), data => {
       if (data.status === "OK") {
         let results = data.results;
         let countryName = _.find(results, item => item.types.includes("country")).formatted_address || false;
@@ -108,7 +112,7 @@ export default class MapControls extends Component {
           zoom={this.state.displayZoom}
           coords={this.state.displayCoords}
           location={this.state.displayLocation}
-          apiKey={'AIzaSyAKvQ74lV2z8AuM6ERIearPxOPWBzuRVfo'}
+          apiKey={this.props.apiKey}
         />
         <div className="map-options">
           <button onClick={this.newMap}>Generate map</button><br/>
