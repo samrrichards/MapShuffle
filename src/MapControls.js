@@ -35,26 +35,13 @@ export default class MapControls extends Component {
     }
   }
 
-  getStateInfo(results, coords){
-    let stateData = _.find(results, item => item.types.includes("administrative_area_level_1"));
-
-    if (stateData === undefined) {
-      this.usMap();
-    } else {
-      this.setState({
-        displayCoords: coords,
-        displayLocation: stateData.formatted_address.replace(/, USA/i, '')
-      });
-    }
-  }
-
   usMap() {
-    let coords = genUsCoords();
+    const coords = genUsCoords();
     $.get(genGeocode(coords, this.props.apiKey), data => {
       if (data.status === "OK") {
-        let results = data.results;
-        let countryName = _.find(results, item => item.types.includes("country")).formatted_address || false;
-        if (countryName && countryName === "United States") {
+        const results = data.results;
+        const countryData = _.find(results, item => item.types.includes("country"));
+        if (countryData !== undefined && countryData.formatted_address === "United States") {
           this.getStateInfo(results, coords);
         } else {
           this.usMap();
@@ -66,18 +53,18 @@ export default class MapControls extends Component {
   }
 
   globalMap(){
-    let coords = genGlobalCoords();
+    const coords = genGlobalCoords();
     $.get(genGeocode(coords, this.props.apiKey), data => {
       if (data.status === "OK") {
-        let results = data.results;
-        let countryName = _.find(results, item => item.types.includes("country")).formatted_address || false;
-        if (countryName && countryName !== "Antarctica" && countryName !== "Greenland") {
-          if (countryName === "United States") {
+        const results = data.results;
+        const countryData = _.find(results, item => item.types.includes("country"));
+        if (countryData !== undefined) {
+          if (countryData.formatted_address === "United States") {
             this.getStateInfo(results, coords);
           } else {
             this.setState({
               displayCoords: coords,
-              displayLocation: countryName
+              displayLocation: countryData.formatted_address
             });
           }
         } else {
@@ -87,6 +74,19 @@ export default class MapControls extends Component {
         this.globalMap();
       }
     });
+  }
+
+  getStateInfo(results, coords){
+    const stateData = _.find(results, item => item.types.includes("administrative_area_level_1"));
+
+    if (stateData !== undefined) {
+      this.setState({
+        displayCoords: coords,
+        displayLocation: stateData.formatted_address.replace(/, USA/i, '')
+      });
+    } else {
+      this.usMap();
+    }
   }
 
   toggleZoom(){

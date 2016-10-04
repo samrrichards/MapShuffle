@@ -10,7 +10,7 @@ export function genGeocode(coords, apiKey){
 }
 
 export function genGlobalCoords(){
-  return {lat: getCoord(randomInt(-70, 70)), lng: getCoord(randomInt(-180, 180))};
+  return {lat: getCoord(randomInt(-56, 66)), lng: getCoord(randomInt(-180, 180))};
 }
 
 export function genUsCoords() {
