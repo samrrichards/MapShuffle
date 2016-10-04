@@ -1,8 +1,10 @@
 ## MapShuffle
 
-Generates random Google maps, located within the continental United States.
+This app generates random Google maps. If you use the default settings, your map could be centered anywhere on Earth, with the exception of the region near the North Pole, Antarctica, and ocean areas that aren't claimed by any particular country (...I suspect you won't miss staring at large stretches of ocean and aren't looking for Santa's workshop or anything. :P).
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+If you feel like walking off to look for America, you can set the app to only generate maps centered within the continental United States. You can also randomize the zoom level, which might give you a closer look at interesting scenery... or leave you stranded in the middle of uninhabited wilderness!
+
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). It was built almost entirely using React, with the help of a few awesome NPM modules (especially [Google-Map-React](https://github.com/istarkov/google-map-react)) and a Node.js server hosted on AWS that serves an encrypted API key all day, every day (but only if you're a trusted friend and ask nicely).
 
 MIT License
 
