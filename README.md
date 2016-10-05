@@ -4,7 +4,7 @@ This app generates random Google maps. If you use the default settings, your map
 
 If you feel like walking off to look for America, you can set the app to only generate maps centered within the continental United States. You can also randomize the zoom level, which might give you a closer look at interesting scenery... or leave you stranded in the middle of uninhabited wilderness!
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). It was built almost entirely using React, with the help of a few awesome NPM modules (especially [Google-Map-React](https://github.com/istarkov/google-map-react)) and a Node.js server that serves an encrypted API key over HTTPS all day, every day (but only if you're a trusted friend and ask nicely).
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). It was built almost entirely using React, with the help of a few awesome NPM modules (especially [Google-Map-React](https://github.com/istarkov/google-map-react)) and a Node.js server that serves an encrypted API key over HTTPS via [Zeit's Now cloud deployment tool](https://zeit.co/now). 
 
 **MIT License
 Copyright © 2016 Sam Richards**
