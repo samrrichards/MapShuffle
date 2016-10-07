@@ -1,6 +1,6 @@
 ## MapShuffle
 
-This app generates random Google maps. If you use the default settings, your map could be centered anywhere on Earth except for polar regions and ocean areas that aren't claimed by any particular country (...I suspect you won't miss staring at large stretches of ocean and aren't looking for Santa's workshop or anything. :P).
+This app generates random Google maps. If you use the default settings, your map could be centered anywhere on Earth except for polar regions and ocean areas that aren't claimed by any particular country. (...I suspect you won't miss staring at large stretches of ocean and aren't looking for Santa's workshop or anything. :P)
 
 If you feel like walking off to look for America, you can set the app to only generate maps centered within the continental United States. You can also randomize the zoom level, which might give you a closer look at interesting scenery... or leave you stranded in the middle of uninhabited wilderness!
 
