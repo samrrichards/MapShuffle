@@ -8,13 +8,15 @@
 }
 
 .title {
+  color: #E53935;
   color: red;
   font-size: 3em;
-  margin: 7px;
+  margin-top: 7px;
+  margin-bottom: 0px;
 }
 
 .subtitle {
-  color: blue;
+  color: #1565C0;
   margin: 0px;
 }
 
@@ -26,10 +28,14 @@
   font-family: optima;
 }
 
+.intro-pic {
+  height: 415px;
+}
+
 .map {
   height: 380px;
   width: 665px;
-  padding-top: 20px;
+  padding-top: 15px;
   vertical-align: middle;
   display: inline-block;
 }
@@ -40,4 +46,5 @@
 
 .credits {
   font-size: 0.8em;
+  margin: -12px;
 }

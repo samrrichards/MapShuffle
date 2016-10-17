@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMap from 'google-map-react';
+import introPic from './assets/intro-pic.jpg'
 
 export default class MapWrapper extends Component {
   constructor(props) {
@@ -38,6 +39,7 @@ export default class MapWrapper extends Component {
     if (!this.state.mapPresent) {
       return (
         <div className="info">
+          <img className='intro-pic' src={introPic} alt='' /> 
           <p>Click the button to get a random Google map!</p>
         </div>
       );
