@@ -30,8 +30,8 @@ class MapShuffle extends Component {
     return (
       <div className="MapShuffle">
         <div className="header">
-          <h1>MapShuffle</h1>
-          <p>A geography discovery app.</p>
+          <h1 className="title">MapShuffle</h1>
+          <p className="subtitle">A geography discovery app.</p>
         </div>
         <div className="MapControls">
           <MapControls

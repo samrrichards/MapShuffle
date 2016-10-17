@@ -2,11 +2,17 @@
   text-align: center;
 }
 
-.header {
-  background-color: #222;
-  height: 100px;
-  padding: 10px;
-  color: white;
+.title {
+  color: red;
+  font-size: 3em;
+  margin: 7px;
+  font-family: courier;
+}
+
+.subtitle {
+  color: blue;
+  margin: 0px;
+  font-family: courier;
 }
 
 .credits {
