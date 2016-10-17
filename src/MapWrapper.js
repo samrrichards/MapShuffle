@@ -37,7 +37,7 @@ export default class MapWrapper extends Component {
   render(){
     if (!this.state.mapPresent) {
       return (
-        <div>
+        <div className="info">
           <p>Click the button to get a random Google map!</p>
         </div>
       );
@@ -51,9 +51,10 @@ export default class MapWrapper extends Component {
             zoom={this.props.zoom}
             options={this.genOptions()} />
           </div>
-          <p>{`Welcome to ${this.props.location}!`}</p>
-          <p>Here is a<a target={"blank"} href={this.genLink(this.props.coords)}> link to the map</a>.</p>
-          <p>Click the button to get a new random map!</p>
+          <div className="info">
+            <p> Welcome to {this.props.location}!</p>
+            <p><a target={"blank"} href={this.genLink(this.props.coords)}>Click here</a> to open the map in another window.</p>
+          </div>
         </div>
       );
     }

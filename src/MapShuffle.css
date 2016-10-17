@@ -1,32 +1,43 @@
 .MapShuffle {
   text-align: center;
+  font-family: optima;
+}
+
+.header {
+  font-family: courier;
 }
 
 .title {
   color: red;
   font-size: 3em;
   margin: 7px;
-  font-family: courier;
 }
 
 .subtitle {
   color: blue;
   margin: 0px;
-  font-family: courier;
 }
 
-.credits {
-  font-size: 0.8em;
+.info p {
+  margin: 5px;
+}
+
+.info {
+  font-family: optima;
+}
+
+.map {
+  height: 380px;
+  width: 665px;
+  padding-top: 20px;
+  vertical-align: middle;
+  display: inline-block;
 }
 
 .map-options {
   font-size: 0.7em;
 }
 
-.map {
-  height: 400px;
-  width: 700px;
-  padding-top: 20px;
-  vertical-align: middle;
-  display: inline-block;
+.credits {
+  font-size: 0.8em;
 }

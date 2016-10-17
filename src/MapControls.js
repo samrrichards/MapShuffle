@@ -111,8 +111,8 @@ export default class MapControls extends Component {
           apiKey={this.props.apiKey}
         />
         <div className="map-options">
-          <button onClick={this.newMap}>Generate map</button><br/>
-          <label className="map-toggle">
+          <button className="map-button" onClick={this.newMap}>Generate map</button><br/>
+          <label>
             <input
               type="checkbox"
               checked={this.state.randomZoom}
@@ -131,7 +131,6 @@ export default class MapControls extends Component {
         </div>
         <div className="credits">
           <p>© Sam Richards 2016<br/>
-          Bootstrapped with <a target={"blank"} href={"https://github.com/facebookincubator/create-react-app"}>Create React App</a>.<br/>
           Check out the <a target={"blank"} href={"https://github.com/samrrichards/MapShuffle"}>source code </a>on my Github.</p>
         </div>
       </div>
