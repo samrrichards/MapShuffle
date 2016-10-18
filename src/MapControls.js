@@ -141,7 +141,7 @@ export default class MapControls extends Component {
                 onCheck={this.toggleCoords} />
               </div>
               <RaisedButton className="map-button" primary={true}
-              onClick = {this.newMap}
+              onClick={this.newMap}
               // onTouchTap={this.newMap}
               label={this.state.displayCoords === null ? "Generate Map" : "New Map"} />
           </div>
