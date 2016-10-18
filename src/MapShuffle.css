@@ -1,6 +1,6 @@
 .MapShuffle {
+  font-family: georgia;
   text-align: center;
-  font-family: optima;
 }
 
 .header {
@@ -24,17 +24,13 @@
   margin: 5px;
 }
 
-.info {
-  font-family: optima;
-}
-
 .intro-pic {
-  height: 415px;
+  height: 395px;
 }
 
 .map {
-  height: 380px;
-  width: 665px;
+  height: 360px;
+  width: 630px;
   padding-top: 15px;
   vertical-align: middle;
   display: inline-block;
@@ -43,19 +39,15 @@
 .map-options {
   margin-left: auto;
   margin-right: auto;
-  font-size: 0.7em;
-  width: 240px;
+  max-width: 300px;
   float: center;
 }
 
-/*.map-checkboxes {
-  float: center;
-  width: 240px;
-  font-size: 12px;
-  font-family: optima;
-}*/
+.map-checkbox {
+  font-size: 13px;
+}
 
 .credits {
   font-size: 0.8em;
-  margin: -12px;
+  margin: 0px;
 }

@@ -16,6 +16,10 @@ const myTheme = getMuiTheme({
   }
 });
 
+const checkboxStyle = {
+  fontFamily: 'courier'
+}
+
 export default class MapControls extends Component {
   constructor(){
     super();
@@ -124,22 +128,23 @@ export default class MapControls extends Component {
         />
         <MuiThemeProvider muiTheme={myTheme}>
           <div className="map-options">
-            <RaisedButton className="map-button" primary={true} onTouchTap={this.newMap}
-            label={this.state.displayCoords === null ? "Generate Map" : "New Map"} /><br/>
-            <div className="map-checkboxes" >
-              <Checkbox
+
+            <div>
+              <Checkbox className="map-checkbox" style={checkboxStyle}
                 label="Randomize zoom level"
                 checked={this.state.randomZoom}
                 onCheck={this.toggleZoom} />
-              <Checkbox
+              <Checkbox className="map-checkbox" style={checkboxStyle}
                 label="Only show continental U.S. maps"
                 checked={this.state.usCoords}
                 onCheck={this.toggleCoords} />
               </div>
+              <RaisedButton className="map-button" primary={true} onTouchTap={this.newMap}
+              label={this.state.displayCoords === null ? "Generate Map" : "New Map"} />
           </div>
         </MuiThemeProvider>
         <div className="credits">
-          <p>© Sam Richards 2016<br/>
+          <p>© Sam Richards 2016. 
           Check out the <a target={"blank"} href={"https://github.com/samrrichards/MapShuffle"}>source code </a>on my Github.</p>
         </div>
       </div>
