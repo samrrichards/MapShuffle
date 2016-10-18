@@ -11,6 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Checkbox from 'material-ui/Checkbox';
 
 const myTheme = getMuiTheme({
+  fontFamily: 'Georgia', 
   palette: {
     primary1Color: blue700
   }
@@ -144,7 +145,7 @@ export default class MapControls extends Component {
           </div>
         </MuiThemeProvider>
         <div className="credits">
-          <p>© Sam Richards 2016. 
+          <p>© Sam Richards 2016.
           Check out the <a target={"blank"} href={"https://github.com/samrrichards/MapShuffle"}>source code </a>on my Github.</p>
         </div>
       </div>
