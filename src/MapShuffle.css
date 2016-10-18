@@ -41,8 +41,19 @@
 }
 
 .map-options {
+  margin-left: auto;
+  margin-right: auto;
   font-size: 0.7em;
+  width: 240px;
+  float: center;
 }
+
+/*.map-checkboxes {
+  float: center;
+  width: 240px;
+  font-size: 12px;
+  font-family: optima;
+}*/
 
 .credits {
   font-size: 0.8em;

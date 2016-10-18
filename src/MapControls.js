@@ -4,6 +4,18 @@ import MapWrapper from './MapWrapper.js';
 import $ from 'jquery';
 import _ from 'lodash';
 
+import { blue700 } from 'material-ui/styles/colors';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import RaisedButton from 'material-ui/RaisedButton';
+import Checkbox from 'material-ui/Checkbox';
+
+const myTheme = getMuiTheme({
+  palette: {
+    primary1Color: blue700
+  }
+});
+
 export default class MapControls extends Component {
   constructor(){
     super();
@@ -110,25 +122,22 @@ export default class MapControls extends Component {
           location={this.state.displayLocation}
           apiKey={this.props.apiKey}
         />
-        <div className="map-options">
-          <button className="map-button" onClick={this.newMap}>Generate map</button><br/>
-          <label>
-            <input
-              type="checkbox"
-              checked={this.state.randomZoom}
-              onChange={this.toggleZoom}
-            />
-            Randomize zoom level
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={this.state.usCoords}
-              onChange={this.toggleCoords}
-            />
-            Only show continental U.S. maps
-          </label>
-        </div>
+        <MuiThemeProvider muiTheme={myTheme}>
+          <div className="map-options">
+            <RaisedButton className="map-button" primary={true} onTouchTap={this.newMap}
+            label={this.state.displayCoords === null ? "Generate Map" : "New Map"} /><br/>
+            <div className="map-checkboxes" >
+              <Checkbox
+                label="Randomize zoom level"
+                checked={this.state.randomZoom}
+                onCheck={this.toggleZoom} />
+              <Checkbox
+                label="Only show continental U.S. maps"
+                checked={this.state.usCoords}
+                onCheck={this.toggleCoords} />
+              </div>
+          </div>
+        </MuiThemeProvider>
         <div className="credits">
           <p>© Sam Richards 2016<br/>
           Check out the <a target={"blank"} href={"https://github.com/samrrichards/MapShuffle"}>source code </a>on my Github.</p>
