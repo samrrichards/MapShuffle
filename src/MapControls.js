@@ -11,7 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Checkbox from 'material-ui/Checkbox';
 
 const myTheme = getMuiTheme({
-  fontFamily: 'Georgia', 
+  fontFamily: 'Georgia',
   palette: {
     primary1Color: blue700
   }
@@ -140,7 +140,9 @@ export default class MapControls extends Component {
                 checked={this.state.usCoords}
                 onCheck={this.toggleCoords} />
               </div>
-              <RaisedButton className="map-button" primary={true} onTouchTap={this.newMap}
+              <RaisedButton className="map-button" primary={true}
+              onClick = {this.newMap}
+              // onTouchTap={this.newMap}
               label={this.state.displayCoords === null ? "Generate Map" : "New Map"} />
           </div>
         </MuiThemeProvider>
