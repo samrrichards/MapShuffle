@@ -17,10 +17,6 @@ const myTheme = getMuiTheme({
   }
 });
 
-const checkboxStyle = {
-  fontFamily: 'courier'
-}
-
 export default class MapControls extends Component {
   constructor(){
     super();
@@ -130,20 +126,20 @@ export default class MapControls extends Component {
         <MuiThemeProvider muiTheme={myTheme}>
           <div className="map-options">
 
-            <div>
-              <Checkbox className="map-checkbox" style={checkboxStyle}
+            <div className="map-checkboxes">
+              <Checkbox
                 label="Randomize zoom level"
                 checked={this.state.randomZoom}
                 onCheck={this.toggleZoom} />
-              <Checkbox className="map-checkbox" style={checkboxStyle}
+              <Checkbox
                 label="Only show continental U.S. maps"
                 checked={this.state.usCoords}
                 onCheck={this.toggleCoords} />
               </div>
-              <RaisedButton className="map-button" primary={true}
-              onClick={this.newMap}
-              // onTouchTap={this.newMap}
-              label={this.state.displayCoords === null ? "Generate Map" : "New Map"} />
+              <RaisedButton className="map-button"
+                label={this.state.displayCoords === null ? "Generate Map" : "New Map"}
+                primary={true}
+                onTouchTap={this.newMap} />
           </div>
         </MuiThemeProvider>
         <div className="credits">
