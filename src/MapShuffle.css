@@ -31,7 +31,6 @@
 .intro-pic {
   max-height: 50%;
   max-width: 50%;
-  transform: scale;
 }
 
 .map {
@@ -40,10 +39,6 @@
   padding-top: 15px;
   vertical-align: middle;
   display: inline-block;
-}
-
-.map-panel {
-  transform: scale;
 }
 
 .map-container {

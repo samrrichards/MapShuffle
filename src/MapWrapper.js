@@ -40,7 +40,7 @@ export default class MapWrapper extends Component {
     if (!this.state.mapPresent) {
       return (
         <div className="info">
-          <Image className='intro-pic' src={introPic} alt='' />
+          <Image className='intro-pic' style={{transform: 'scale'}} src={introPic} alt='' />
           <p>Click the button to get a random Google map!</p>
         </div>
       );
@@ -48,7 +48,7 @@ export default class MapWrapper extends Component {
       return (
         <div>
           <div className="map1">
-            <Panel className="map-panel">
+            <Panel className="map-panel" style={{transform: 'scale'}}>
               <div className="map-container">
                 <GoogleMap
                 bootstrapURLKeys={{key: this.props.apiKey}}
