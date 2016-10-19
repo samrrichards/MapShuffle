@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMap from 'google-map-react';
-import introPic from './assets/intro-pic.jpg'
+import Image from 'react-bootstrap/lib/Image';
+import introPic from './assets/intro-pic.jpg';
 
 export default class MapWrapper extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ export default class MapWrapper extends Component {
     if (!this.state.mapPresent) {
       return (
         <div className="info">
-          <img className='intro-pic' src={introPic} alt='' />
+          <Image className='intro-pic' src={introPic} alt='' />
           <p>Click the button to get a random Google map!</p>
         </div>
       );
@@ -54,8 +55,8 @@ export default class MapWrapper extends Component {
             options={this.genOptions()} />
           </div>
           <div className="info">
-            <p> Welcome to {this.props.location}!</p>
-            <p><a target={"blank"} href={this.genLink(this.props.coords)}>Click here</a> to open the map in another tab.</p>
+            <p className="info-text"> Welcome to {this.props.location}!</p>
+            <p className="info-link"><a target={"blank"} href={this.genLink(this.props.coords)}>Click here</a> to open the map in another tab.</p>
           </div>
         </div>
       );

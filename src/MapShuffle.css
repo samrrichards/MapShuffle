@@ -24,8 +24,14 @@
   margin: 5px;
 }
 
+.info-link {
+  font-size: 14px;
+}
+
 .intro-pic {
-  height: 395px;
+  max-height: 55%;
+  max-width: 55%;
+  transform: scale;
 }
 
 .map {
