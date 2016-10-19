@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMap from 'google-map-react';
-import Image from 'react-bootstrap/lib/Image';
+import { Image, Panel} from 'react-bootstrap/lib';
 import introPic from './assets/intro-pic.jpg';
 
 export default class MapWrapper extends Component {
@@ -47,12 +47,16 @@ export default class MapWrapper extends Component {
     } else {
       return (
         <div>
-          <div className="map">
-            <GoogleMap
-            bootstrapURLKeys={{key: this.props.apiKey}}
-            center={this.props.coords}
-            zoom={this.props.zoom}
-            options={this.genOptions()} />
+          <div className="map1">
+            <Panel className="map-panel">
+              <div className="map-container">
+                <GoogleMap
+                bootstrapURLKeys={{key: this.props.apiKey}}
+                center={this.props.coords}
+                zoom={this.props.zoom}
+                options={this.genOptions()} />
+              </div>
+            </Panel>
           </div>
           <div className="info">
             <p className="info-text"> Welcome to {this.props.location}!</p>
