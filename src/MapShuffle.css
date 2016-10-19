@@ -29,8 +29,8 @@
 }
 
 .intro-pic {
-  max-height: 55%;
-  max-width: 55%;
+  max-height: 50%;
+  max-width: 50%;
   transform: scale;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .map-container {
-  height: 22em;
+  height: 370px;
   width: 75%;
   padding-top: 15px;
   vertical-align: middle;
