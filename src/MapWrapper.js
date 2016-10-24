@@ -47,7 +47,7 @@ export default class MapWrapper extends Component {
     } else {
       return (
         <div>
-          <div className="map1">
+          <div className="map">
             <Panel className="map-panel" style={{transform: 'scale'}}>
               <div className="map-container">
                 <GoogleMap

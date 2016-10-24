@@ -33,17 +33,17 @@
   max-width: 50%;
 }
 
-.map {
+/*.map {
   height: 360px;
   width: 630px;
   padding-top: 15px;
   vertical-align: middle;
   display: inline-block;
-}
+}*/
 
 .map-container {
-  height: 20em;
-  width: 75%;
+  height: 24em;
+  width: 70%;
   padding-top: 15px;
   vertical-align: middle;
   display: inline-block;
