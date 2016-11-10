@@ -33,6 +33,7 @@ export default class MapWrapper extends Component {
     return {
       mapTypeId: 'hybrid',
       mapTypeControl: true,
+      scaleControl: true 
     }
   }
 
