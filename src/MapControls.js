@@ -67,6 +67,7 @@ export default class MapControls extends Component {
 
   globalMap(){
     const coords = genGlobalCoords();
+
     $.get(genGeocode(coords, this.props.apiKey), data => {
       if (data.status === "OK") {
         const results = data.results;
@@ -139,11 +140,11 @@ export default class MapControls extends Component {
               <RaisedButton className="map-button"
                 label={this.state.displayCoords === null ? "Generate Map" : "New Map"}
                 primary={true}
-                onTouchTap={this.newMap} />
+                onClick={this.newMap} />
           </div>
         </MuiThemeProvider>
         <div className="credits">
-          <p>© Sam Richards 2016.
+          <p>© Sam Richards 2018.
           Check out the <a target={"blank"} href={"https://github.com/samrrichards/MapShuffle"}>source code </a>on my Github.</p>
         </div>
       </div>
