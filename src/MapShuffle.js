@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import MapControls from './MapControls.js';
 
-import { apiKey } from './secret/api_key.js'; 
+import { apiKey } from './secret/api_key.js';
 import './MapShuffle.css';
 
 const MapShuffle = () => (
@@ -16,4 +16,4 @@ const MapShuffle = () => (
   </div>
 );
 
-export default MapShuffle; 
+export default MapShuffle;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {genZoom, genGeocode, genUsCoords, genGlobalCoords} from './map_utils.js';
 import MapWrapper from './MapWrapper.js';
-import $ from 'jquery';
+import fetch from 'node-fetch';
 import _ from 'lodash';
 
 import { blue700 } from 'material-ui/styles/colors';
@@ -34,6 +34,7 @@ export default class MapControls extends Component {
     this.usMap = this.usMap.bind(this);
 
     this.getStateInfo = this.getStateInfo.bind(this);
+    this.getCountryInfo = this.getCountryInfo.bind(this);
 
     this.toggleZoom = this.toggleZoom.bind(this);
     this.toggleCoords = this.toggleCoords.bind(this);
@@ -49,45 +50,38 @@ export default class MapControls extends Component {
   }
 
   usMap() {
+    const { getStateInfo, usMap } = this;
     const coords = genUsCoords();
-    $.get(genGeocode(coords, this.props.apiKey), data => {
-      if (data.status === "OK") {
-        const results = data.results;
-        const countryData = _.find(results, item => item.types.includes("country"));
-        if (countryData !== undefined && countryData.formatted_address === "United States") {
-          this.getStateInfo(results, coords);
-        } else {
-          this.usMap();
-        }
-      } else {
-        this.usMap();
-      }
-    });
+
+    const usMapResponse = data => {
+      const { results } = data;
+      const countryData = _.find(results, item => item.types.includes("country"));
+      const usMapReturned = countryData !== undefined && countryData.formatted_address === "United States";
+
+      usMapReturned ? getStateInfo(results, coords) : usMap();
+    };
+
+    fetch(genGeocode(coords, this.props.apiKey))
+      .then(res => res.json())
+      .then(data => data.status === "OK" ? usMapResponse(data) : usMap())
+      .catch(err => console.error(err));
   }
 
   globalMap(){
+    const { getCountryInfo, globalMap } = this;
     const coords = genGlobalCoords();
 
-    $.get(genGeocode(coords, this.props.apiKey), data => {
-      if (data.status === "OK") {
-        const results = data.results;
-        const countryData = _.find(results, item => item.types.includes("country"));
-        if (countryData !== undefined) {
-          if (countryData.formatted_address === "United States") {
-            this.getStateInfo(results, coords);
-          } else {
-            this.setState({
-              displayCoords: coords,
-              displayLocation: countryData.formatted_address
-            });
-          }
-        } else {
-          this.globalMap();
-        }
-      } else {
-        this.globalMap();
-      }
-    });
+    const globalMapResponse = data => {
+      const { results }= data;
+      const countryData = _.find(results, item => item.types.includes("country"));
+
+      countryData !== undefined ? getCountryInfo(results, coords, countryData) : globalMap();
+    };
+
+    fetch(genGeocode(coords, this.props.apiKey))
+      .then(res => res.json())
+      .then(data => data.status === "OK" ? globalMapResponse(data) : globalMap())
+      .catch(err => console.error(err));
   }
 
   getStateInfo(results, coords){
@@ -100,6 +94,17 @@ export default class MapControls extends Component {
       });
     } else {
       this.usMap();
+    }
+  }
+
+  getCountryInfo(results, coords, countryData) {
+    if (countryData.formatted_address === "United States") {
+      this.getStateInfo(results, coords);
+    } else {
+      this.setState({
+        displayCoords: coords,
+        displayLocation: countryData.formatted_address
+      });
     }
   }
 
