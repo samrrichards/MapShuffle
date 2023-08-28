@@ -61,7 +61,7 @@ export default class MapControls extends Component {
       usMapReturned ? getStateInfo(results, coords) : usMap();
     };
 
-    fetch(genGeocode(coords, this.props.apiKey))
+    fetch(genGeocode(coords))
       .then(res => res.json())
       .then(data => data.status === "OK" ? usMapResponse(data) : usMap())
       .catch(err => console.error(err));
@@ -78,7 +78,7 @@ export default class MapControls extends Component {
       countryData !== undefined ? getCountryInfo(results, coords, countryData) : globalMap();
     };
 
-    fetch(genGeocode(coords, this.props.apiKey))
+    fetch(genGeocode(coords))
       .then(res => res.json())
       .then(data => data.status === "OK" ? globalMapResponse(data) : globalMap())
       .catch(err => console.error(err));
@@ -127,7 +127,6 @@ export default class MapControls extends Component {
           zoom={this.state.displayZoom}
           coords={this.state.displayCoords}
           location={this.state.displayLocation}
-          apiKey={this.props.apiKey}
         />
         <MuiThemeProvider muiTheme={myTheme}>
           <div className="map-options">

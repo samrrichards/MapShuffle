@@ -3,6 +3,8 @@ import GoogleMap from 'google-map-react';
 import { Image, Panel} from 'react-bootstrap/lib';
 import introPic from './assets/intro-pic.jpg';
 
+const apiKey = process.env.REACT_APP_API_KEY;
+
 export default class MapWrapper extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +28,7 @@ export default class MapWrapper extends Component {
   }
 
   genGeocode(coords){
-    return `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.lat},${coords.lng}&key=${this.props.apiKey}`;
+    return `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.lat},${coords.lng}&key=${apiKey}`;
   }
 
   genOptions() {
@@ -52,7 +54,7 @@ export default class MapWrapper extends Component {
             <Panel className="map-panel" style={{transform: 'scale'}}>
               <div className="map-container">
                 <GoogleMap
-                bootstrapURLKeys={{key: this.props.apiKey}}
+                bootstrapURLKeys={{key: apiKey}}
                 center={this.props.coords}
                 zoom={this.props.zoom}
                 options={this.genOptions()} />

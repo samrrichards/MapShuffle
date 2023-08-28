@@ -10,7 +10,7 @@ const MapShuffle = () => (
       <p className="subtitle">A geography discovery app.</p>
     </div>
     <div className="MapControls">
-      <MapControls  apiKey={process.env.REACT_APP_API_KEY} />
+      <MapControls />
     </div>
   </div>
 );
